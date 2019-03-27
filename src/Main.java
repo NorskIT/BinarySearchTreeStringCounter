@@ -3,7 +3,8 @@ import java.util.Arrays;
 
 public class Main {
 
-    /* Creating the binary tree
+    /*
+            ********** Creating the binary tree **********
         1.  Prepare text
         2.  Create Tree root
         3.  Create empty tree
@@ -18,7 +19,7 @@ public class Main {
      */
 
     /*
-        Printing out the tree alphabetically
+            ********** Printing out the tree alphabetically **********
         We assume the binary trees left side is A and the right side is 2
         1. Try print out current node
             1.1 if left node is null
@@ -36,18 +37,26 @@ public class Main {
         BinarySearchTree tree = new BinarySearchTree(balanceWord);
 
         //For each word in the string, place it into the tree node.
-        for(String word : text) {
-            if (!word.equals("")) {
-                tree.insert(tree.getRoot(), word);
+        if(text.length > 0) {
+            for (String word : text) {
+                if (!word.equals("")) {
+                    tree.insert(tree.getRoot(), word);
+                }
             }
+            tree.print();
+        } else {
+            System.out.println("File found, but file was empty.");
         }
-        tree.print();
+
+
     }
 
     //Returns the middle word of the text when sorted
-    public static String PopMiddleWord(String[] array) {
+    private static String PopMiddleWord(String[] array) {
         String[] text = FileToTextConverter.RefractorTextToCorrectArray(new File("src/text.txt"));
-        Arrays.sort(text);
+        if(text != null) {
+            Arrays.sort(text);
+        }
         return text[text.length/2];
     }
 

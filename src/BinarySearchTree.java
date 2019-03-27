@@ -1,26 +1,28 @@
 public class BinarySearchTree {
 
-    // Root of entire search tree
+    // Root of the Binary tree
     private TreeNode root = null;
 
-    private String middleWord = null;
+    //Word fetched from the middle index position of the array after it has been sorted.
+    private String balancedWord = null;
 
+    //Non-balanced tree
     public BinarySearchTree()
     {}
 
     //Balanced tree
-    public BinarySearchTree(String middleWord)
+    BinarySearchTree(String middleWord)
     {
-        this.middleWord = middleWord;
+        this.balancedWord = middleWord;
 
     }
 
-    public TreeNode getRoot() {
+    TreeNode getRoot() {
         return root;
     }
 
-    //Send tree node and the word you which to insert.
-    public void insert(TreeNode current, String word)
+    //Receives the tree node and the word you which to insert.
+    void insert(TreeNode current, String word)
     {
         //Sets the word to its own node
         TreeNode newNode = new TreeNode(word);
@@ -28,9 +30,10 @@ public class BinarySearchTree {
         //If tree has no root
         if (root == null)
         {
-            //Adds balanced word to the array, so we need to set the encountered to 0.
-            if(middleWord != null) {
-                root = new TreeNode(middleWord, 0);
+            //If balancedWord has been made
+            if(balancedWord != null) {
+                //Set root word to balancedWord. Set occurrences to prevent 1 extra count on root word.
+                root = new TreeNode(balancedWord, 0);
             }
             //Sets the first word as the tree root
             else {
@@ -40,50 +43,57 @@ public class BinarySearchTree {
         }
 
         //If new word is behind of this word in the alphabet, add it to the left node.
-        if (current.word.compareTo(word) < 0)
+        if (current.getWord().compareTo(word) < 0)
         {
             //Left node is null, set new node to this left node.
-            if (current.left == null)
+            if (current.getLeft() == null)
             {
-                current.left = newNode;
+                current.setLeft(newNode);
             }
             //Try to insert into left node
             else
-                insert(current.left, word);
+                insert(current.getLeft(), word);
         }
+
         //If new word is ahead of this word in the alphabet, add it to the right node.
-        else if(current.word.compareTo(word) > 0)
+        else if(current.getWord().compareTo(word) > 0)
         {
             //Right node is null, set new node to this right node.
-            if (current.right == null)
+            if (current.getRight() == null)
             {
-                current.right = newNode;
+                current.setRight(newNode);
             }
             //Try to insert into right node
             else
-                insert(current.right, word);
+                insert(current.getRight(), word);
         }
         //New word is the same as this nodes word
         else {
             //Adds this tree node encountered one up.
             current.hit();
         }
-
     }
 
-    public void print()
+    //Print out the Binary tree
+    void print()
     {
+        //Start process at top of the tree
         print(root);
         System.out.println("\n");
     }
 
+    //Print out a tree node under the root.
     private void print(TreeNode t)
     {
+        //if root is not null
         if (t != null)
         {
-            print(t.left);
+            //Print out left node.
+            print(t.getLeft());
+            //Print out current node
             System.out.println(t.toString());
-            print(t.right);
+            //Print out right node.
+            print(t.getRight());
         }
     }
 

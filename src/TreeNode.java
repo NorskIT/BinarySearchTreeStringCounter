@@ -1,27 +1,46 @@
 public class TreeNode {
 
-    String word;
-    int encountered = 1;
-    TreeNode left, right;
+    private String word;
+    private int occurrence = 1;
+    private TreeNode left, right;
 
-    public TreeNode(String word) {
+    TreeNode(String word) {
         this.word = word;
         left = right = null;
     }
 
     //Balanced tree constructor
-    public TreeNode(String word, int encountered) {
+    TreeNode(String word, int encountered) {
         this.word = word;
-        this.encountered = encountered;
+        this.occurrence = encountered;
         left = right = null;
+    }
+
+    String getWord() {
+        return word;
+    }
+
+    TreeNode getLeft() {
+        return left;
+    }
+
+    TreeNode getRight() {
+        return right;
+    }
+
+    void setLeft(TreeNode left) {
+        this.left = left;
+    }
+
+    void setRight(TreeNode right) {
+        this.right = right;
     }
 
     @Override
     public String toString() {
-        return encountered + "\t : \t" + word;
+        return occurrence + "\t : \t" + word;
     }
-
     void hit() {
-        this.encountered++;
+        this.occurrence++;
     }
 }

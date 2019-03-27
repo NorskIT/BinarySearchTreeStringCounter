@@ -1,27 +1,27 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
-public class FileToTextConverter {
+class FileToTextConverter {
 
-    public static String[] RefractorTextToCorrectArray(File file) {
+    static String[] RefractorTextToCorrectArray(File file) {
         BufferedReader buf = null;
         String line;
         try {
             buf = new BufferedReader(new FileReader(file));
         } catch (FileNotFoundException e) {
-            System.out.println("File not found...");
+            e.printStackTrace();
         }
         try {
-            line = buf.readLine();
+            line = Objects.requireNonNull(buf).readLine();
             StringBuilder sb = new StringBuilder();
             while(line != null){
                 sb.append(line).append("\n");
                 line = buf.readLine();
             }
             String fileAsString = sb.toString().replaceAll("[^a-zA-ZæøåÆØÅ ]","").toUpperCase();
-            String[] rawTextArray = fileAsString.split(" ");
-            return rawTextArray;
+            return fileAsString.split(" ");
         } catch (IOException e) {
             e.printStackTrace();
         }
