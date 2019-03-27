@@ -9,12 +9,19 @@ public class TreeNode {
         left = right = null;
     }
 
+    //Balanced tree constructor
+    public TreeNode(String word, int encountered) {
+        this.word = word;
+        this.encountered = encountered;
+        left = right = null;
+    }
+
     @Override
     public String toString() {
         return encountered + "\t : \t" + word;
     }
 
-    public void hit() {
+    void hit() {
         this.encountered++;
     }
 }
